@@ -1,0 +1,2859 @@
+/* =========================================
+   SERVER ROOM MONITORING
+   MAIN STYLESHEET
+========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f7fb;
+    color: #1f2937;
+}
+
+.app {
+    display: flex;
+    min-height: 100vh;
+}
+
+
+/* =========================================
+   SIDEBAR
+========================================= */
+
+.sidebar {
+    width: 250px;
+    min-height: 100vh;
+    background: #111827;
+    color: white;
+    padding: 24px 16px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 10px 28px;
+    border-bottom: 1px solid #263244;
+}
+
+.logo-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    background: #2563eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.logo h2 {
+    font-size: 16px;
+    margin-bottom: 4px;
+}
+
+.logo span {
+    font-size: 11px;
+    color: #9ca3af;
+}
+
+.sidebar nav {
+    margin-top: 25px;
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: #9ca3af;
+    padding: 13px 14px;
+    margin-bottom: 6px;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.menu span {
+    width: 20px;
+    text-align: center;
+}
+
+.menu:hover {
+    background: #1f2937;
+    color: white;
+}
+
+.menu.active {
+    background: #2563eb;
+    color: white;
+}
+
+.sidebar-footer {
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    bottom: 24px;
+    padding: 14px;
+    border-radius: 10px;
+    background: #1a2332;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.connection-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #22c55e;
+    box-shadow: 0 0 8px rgba(34, 197, 94, 0.7);
+}
+
+.sidebar-footer strong {
+    display: block;
+    font-size: 12px;
+}
+
+.sidebar-footer small {
+    color: #9ca3af;
+    font-size: 10px;
+}
+
+
+/* =========================================
+   MAIN
+========================================= */
+
+.main {
+    margin-left: 250px;
+    width: calc(100% - 250px);
+    padding: 28px;
+}
+
+
+/* =========================================
+   TOPBAR
+========================================= */
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.topbar h1 {
+    font-size: 25px;
+    margin-bottom: 6px;
+}
+
+.topbar p {
+    color: #6b7280;
+    font-size: 13px;
+}
+
+.top-status {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.online {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #16a34a;
+}
+
+.online span {
+    width: 9px;
+    height: 9px;
+    background: #22c55e;
+    border-radius: 50%;
+    box-shadow: 0 0 8px rgba(34, 197, 94, 0.6);
+}
+
+.clock {
+    font-family: monospace;
+    font-size: 15px;
+    font-weight: bold;
+    color: #374151;
+}
+
+
+/* =========================================
+   STATUS BANNER
+========================================= */
+
+.status-banner {
+    background: white;
+    border: 1px solid #dce4ef;
+    border-left: 4px solid #22c55e;
+    border-radius: 10px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 24px;
+}
+
+.status-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #dcfce7;
+    color: #16a34a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.status-banner strong {
+    font-size: 14px;
+}
+
+.status-banner p {
+    margin-top: 4px;
+    font-size: 12px;
+    color: #6b7280;
+}
+
+.last-update {
+    margin-left: auto;
+    text-align: right;
+}
+
+.last-update span {
+    display: block;
+    font-size: 10px;
+    color: #9ca3af;
+}
+
+.last-update strong {
+    font-size: 12px;
+}
+
+
+/* =========================================
+   SENSOR CARDS
+========================================= */
+
+.sensor-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-bottom: 24px;
+}
+
+.sensor-card {
+    background: white;
+    border: 1px solid #e1e7ef;
+    border-radius: 12px;
+    padding: 20px;
+    min-height: 175px;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
+}
+
+.sensor-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.sensor-label {
+    font-size: 9px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #9ca3af;
+}
+
+.sensor-card h3 {
+    margin-top: 5px;
+    font-size: 15px;
+}
+
+.sensor-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.sensor-icon.temperature {
+    background: #fee2e2;
+}
+
+.sensor-icon.humidity {
+    background: #dbeafe;
+}
+
+.sensor-icon.device {
+    background: #e0e7ff;
+}
+
+.sensor-icon.alarm {
+    background: #fef3c7;
+}
+
+.sensor-value {
+    margin-top: 18px;
+    display: flex;
+    align-items: baseline;
+}
+
+.sensor-value span {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.sensor-value small {
+    font-size: 14px;
+    color: #6b7280;
+    margin-left: 4px;
+}
+
+.sensor-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    padding-top: 12px;
+    border-top: 1px solid #edf0f5;
+    font-size: 10px;
+    color: #6b7280;
+}
+
+.normal {
+    color: #16a34a;
+    font-weight: bold;
+}
+
+.device-status {
+    margin-top: 25px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #16a34a;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.device-status.online {
+    background: #ecfdf5;
+    color: #16a34a;
+}
+
+.device-status.offline {
+    background: #fef2f2;
+    color: #dc2626;
+}
+
+.device-status.online span,
+.device-status.offline span {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+}
+
+.device-status.online span {
+    background: #16a34a;
+}
+
+.device-status.offline span {
+    background: #dc2626;
+}
+
+.device-status span {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #22c55e;
+}
+
+.alarm-status {
+    margin-top: 25px;
+    font-size: 22px;
+    font-weight: bold;
+    color: #16a34a;
+}
+
+
+/* =========================================
+   CHARTS
+========================================= */
+
+.charts-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-bottom: 24px;
+}
+
+.chart-card,
+.panel {
+    background: white;
+    border: 1px solid #e1e7ef;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
+}
+
+.chart-header,
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 18px;
+}
+
+.chart-label {
+    font-size: 9px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #9ca3af;
+}
+
+.chart-header h2,
+.panel-header h2 {
+    margin-top: 5px;
+    font-size: 17px;
+}
+
+.chart-header select {
+    border: 1px solid #d7dee8;
+    border-radius: 6px;
+    padding: 7px 10px;
+    background: white;
+    font-size: 11px;
+    color: #374151;
+}
+
+.chart-container {
+    height: 260px;
+    position: relative;
+}
+
+
+/* =========================================
+   BOTTOM PANELS
+========================================= */
+
+.bottom-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.system-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.system-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 0;
+    border-bottom: 1px solid #edf0f5;
+}
+
+.system-item:last-child {
+    border-bottom: none;
+}
+
+.system-name {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.status-circle {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #22c55e;
+}
+
+.system-name strong {
+    display: block;
+    font-size: 13px;
+}
+
+.system-name small {
+    display: block;
+    margin-top: 3px;
+    color: #9ca3af;
+    font-size: 10px;
+}
+
+.green {
+    color: #16a34a;
+    font-size: 12px;
+}
+
+.reading-list > div {
+    display: flex;
+    justify-content: space-between;
+    padding: 14px 0;
+    border-bottom: 1px solid #edf0f5;
+    font-size: 12px;
+}
+
+.reading-list > div:last-child {
+    border-bottom: none;
+}
+
+.reading-list span {
+    color: #6b7280;
+}
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+footer {
+    text-align: center;
+    margin-top: 30px;
+    padding: 20px;
+    color: #9ca3af;
+    font-size: 11px;
+}
+
+footer span {
+    margin: 0 6px;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 1100px) {
+
+    .sensor-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .charts-grid,
+    .bottom-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .sidebar {
+        width: 70px;
+        padding: 15px 10px;
+    }
+
+    .logo div:not(.logo-icon),
+    .menu:not(.active)::after,
+    .sidebar-footer div:not(.connection-dot) {
+        display: none;
+    }
+
+    .logo {
+        justify-content: center;
+        padding: 8px 0 20px;
+    }
+
+    .menu {
+        justify-content: center;
+        padding: 13px 5px;
+    }
+
+    .menu.active {
+        justify-content: center;
+    }
+
+    .main {
+        margin-left: 70px;
+        width: calc(100% - 70px);
+        padding: 18px;
+    }
+
+    .topbar {
+        align-items: flex-start;
+    }
+
+    .topbar h1 {
+        font-size: 20px;
+    }
+
+    .top-status {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .status-banner {
+        align-items: flex-start;
+    }
+
+    .last-update {
+        display: none;
+    }
+
+    .sensor-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .main {
+        padding: 12px;
+    }
+
+    .topbar {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .top-status {
+        flex-direction: row;
+    }
+
+    .chart-card,
+    .panel,
+    .sensor-card {
+        padding: 15px;
+    }
+}
+
+/* =========================================
+   MONITORING PAGE
+========================================= */
+
+.page-section {
+    width: 100%;
+}
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 24px;
+}
+
+.page-label {
+    display: block;
+    font-size: 9px;
+    font-weight: bold;
+    letter-spacing: 1.2px;
+    color: #9ca3af;
+    margin-bottom: 6px;
+}
+
+.page-header h2 {
+    font-size: 25px;
+    color: #1f2937;
+    margin-bottom: 6px;
+}
+
+.page-header p {
+    color: #6b7280;
+    font-size: 13px;
+}
+
+.monitoring-live {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #ecfdf5;
+    color: #15803d;
+    border: 1px solid #bbf7d0;
+    padding: 9px 13px;
+    border-radius: 8px;
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: .5px;
+}
+
+.live-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #22c55e;
+    box-shadow: 0 0 7px rgba(34, 197, 94, .7);
+}
+
+
+/* =========================================
+   MONITORING SUMMARY
+========================================= */
+
+.monitoring-summary {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-bottom: 24px;
+}
+
+.monitoring-card {
+    background: white;
+    border: 1px solid #e1e7ef;
+    border-radius: 12px;
+    padding: 20px;
+    min-height: 175px;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, .03);
+}
+
+.monitoring-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.monitoring-label {
+    font-size: 9px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #9ca3af;
+}
+
+.monitoring-card h3 {
+    margin-top: 5px;
+    font-size: 15px;
+}
+
+.monitoring-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+}
+
+.temperature-icon {
+    background: #fee2e2;
+}
+
+.humidity-icon {
+    background: #dbeafe;
+}
+
+.alarm-icon {
+    background: #fef3c7;
+}
+
+.device-icon {
+    background: #e0e7ff;
+}
+
+.monitoring-value {
+    display: flex;
+    align-items: baseline;
+    margin-top: 18px;
+}
+
+.monitoring-value span {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.monitoring-value small {
+    font-size: 14px;
+    color: #6b7280;
+    margin-left: 4px;
+}
+
+.monitoring-text-value {
+    margin-top: 25px;
+    font-size: 22px;
+    font-weight: bold;
+    color: #16a34a;
+}
+
+.device-online {
+    color: #16a34a;
+}
+
+.monitoring-status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 15px;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.normal-status {
+    color: #16a34a;
+}
+
+
+/* =========================================
+   MONITORING CHARTS
+========================================= */
+
+.monitoring-charts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-bottom: 24px;
+}
+
+.monitoring-chart-card {
+    min-width: 0;
+}
+
+.monitoring-chart-container {
+    height: 290px;
+}
+
+.chart-description {
+    margin-top: 5px;
+    font-size: 11px;
+    color: #9ca3af;
+}
+
+.chart-live {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 9px;
+    border-radius: 6px;
+    background: #ecfdf5;
+    color: #16a34a;
+    font-size: 9px;
+    font-weight: bold;
+}
+
+.chart-live span {
+    width: 6px;
+    height: 6px;
+    background: #22c55e;
+    border-radius: 50%;
+}
+
+
+/* =========================================
+   SENSOR INFORMATION
+========================================= */
+
+.monitoring-information {
+    margin-bottom: 24px;
+}
+
+.data-update {
+    color: #9ca3af;
+    font-size: 10px;
+}
+
+.sensor-table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.sensor-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.sensor-table th {
+    text-align: left;
+    padding: 12px 10px;
+    background: #f8fafc;
+    color: #6b7280;
+    font-size: 10px;
+    font-weight: bold;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.sensor-table td {
+    padding: 14px 10px;
+    border-bottom: 1px solid #edf0f5;
+    color: #4b5563;
+    font-size: 11px;
+}
+
+.sensor-table tr:last-child td {
+    border-bottom: none;
+}
+
+.sensor-table td strong {
+    color: #1f2937;
+}
+
+.table-status {
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.table-status.normal {
+    color: #16a34a;
+}
+
+
+/* =========================================
+   MONITORING DETAILS
+========================================= */
+
+.monitoring-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.condition-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.condition-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 13px 0;
+    border-bottom: 1px solid #edf0f5;
+}
+
+.condition-item:last-child {
+    border-bottom: none;
+}
+
+.condition-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.condition-icon.success {
+    background: #dcfce7;
+    color: #16a34a;
+}
+
+.condition-icon.warning {
+    background: #fef2f2;
+    color: #dc2626;
+}
+
+.condition-item > div:nth-child(2) {
+    flex: 1;
+}
+
+.condition-item strong {
+    display: block;
+    font-size: 12px;
+    color: #1f2937;
+}
+
+.condition-item small {
+    display: block;
+    margin-top: 3px;
+    color: #9ca3af;
+    font-size: 9px;
+}
+
+.condition-ok {
+    font-size: 9px;
+    font-weight: bold;
+    color: #16a34a;
+    background: #ecfdf5;
+    padding: 5px 8px;
+    border-radius: 5px;
+}
+
+.condition-warning {
+    color: #dc2626;
+    font-weight: 600;
+}
+
+.configuration-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.configuration-list > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #edf0f5;
+}
+
+.configuration-list > div:last-child {
+    border-bottom: none;
+}
+
+.configuration-list span {
+    color: #6b7280;
+    font-size: 11px;
+}
+
+.configuration-list strong {
+    color: #1f2937;
+    font-size: 11px;
+}
+
+
+/* =========================================
+   MONITORING RESPONSIVE
+========================================= */
+
+@media (max-width: 1100px) {
+
+    .monitoring-summary {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .monitoring-charts,
+    .monitoring-details {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+@media (max-width: 768px) {
+
+    .page-header {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .monitoring-summary {
+        grid-template-columns: 1fr;
+    }
+
+    .monitoring-chart-container {
+        height: 250px;
+    }
+
+}
+
+@media (max-width: 480px) {
+
+    .monitoring-card {
+        padding: 15px;
+    }
+
+    .monitoring-information {
+        padding: 15px;
+    }
+
+    .monitoring-chart-card {
+        padding: 15px;
+    }
+
+    .sensor-table {
+        min-width: 650px;
+    }
+
+}
+
+/* =========================================
+   HISTORY PAGE
+========================================= */
+
+.history-info {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    background: #eff6ff;
+    color: #2563eb;
+    border: 1px solid #dbeafe;
+    padding: 9px 13px;
+    border-radius: 8px;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.history-info > span {
+    font-size: 11px;
+}
+
+
+/* =========================================
+   HISTORY SUMMARY
+========================================= */
+
+.history-summary {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-bottom: 24px;
+}
+
+.history-summary-card {
+    background: white;
+    border: 1px solid #e1e7ef;
+    border-radius: 12px;
+    padding: 18px;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, .03);
+}
+
+.history-summary-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    background: #dbeafe;
+    color: #2563eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 19px;
+    flex-shrink: 0;
+}
+
+.history-summary-icon.normal-summary {
+    background: #dcfce7;
+    color: #16a34a;
+}
+
+.history-summary-icon.warning-summary {
+    background: #fef3c7;
+    color: #d97706;
+}
+
+.history-summary-icon.latest-summary {
+    background: #e0e7ff;
+    color: #4f46e5;
+}
+
+.history-summary-card span {
+    display: block;
+    font-size: 10px;
+    color: #6b7280;
+}
+
+.history-summary-card strong {
+    display: block;
+    margin-top: 4px;
+    font-size: 21px;
+    color: #1f2937;
+}
+
+.history-summary-card small {
+    display: block;
+    margin-top: 3px;
+    font-size: 9px;
+    color: #9ca3af;
+}
+
+
+/* =========================================
+   HISTORY PANEL
+========================================= */
+
+.history-panel {
+    margin-bottom: 24px;
+}
+
+.history-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.history-controls select {
+    border: 1px solid #d7dee8;
+    border-radius: 6px;
+    padding: 8px 10px;
+    background: white;
+    font-size: 10px;
+    color: #374151;
+}
+
+.btn-secondary {
+    border: 1px solid #d7dee8;
+    background: white;
+    color: #4b5563;
+    border-radius: 6px;
+    padding: 8px 11px;
+    font-size: 10px;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.btn-secondary:hover {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+}
+
+.history-description {
+    margin-bottom: 15px;
+    color: #9ca3af;
+    font-size: 10px;
+}
+
+.history-table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.history-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 780px;
+}
+
+.history-table th {
+    text-align: left;
+    padding: 12px 10px;
+    background: #f8fafc;
+    border-bottom: 1px solid #e5e7eb;
+    color: #6b7280;
+    font-size: 10px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.history-table td {
+    padding: 13px 10px;
+    border-bottom: 1px solid #edf0f5;
+    color: #4b5563;
+    font-size: 11px;
+    white-space: nowrap;
+}
+
+.history-table tbody tr:hover {
+    background: #fafcff;
+}
+
+.history-table td strong {
+    color: #1f2937;
+}
+
+.history-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 9px;
+    font-weight: bold;
+}
+
+.history-status.normal {
+    color: #16a34a;
+}
+
+.history-status.warning {
+    color: #d97706;
+}
+
+.history-status span {
+    font-size: 8px;
+}
+
+.history-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 14px;
+    color: #9ca3af;
+    font-size: 9px;
+}
+
+.history-footer strong {
+    color: #6b7280;
+    font-size: 10px;
+}
+
+
+/* =========================================
+   EMPTY HISTORY
+========================================= */
+
+.empty-history td {
+    padding: 45px 20px !important;
+}
+
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.empty-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #f1f5f9;
+    color: #94a3b8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    margin-bottom: 12px;
+}
+
+.empty-state strong {
+    font-size: 12px;
+    color: #4b5563;
+}
+
+.empty-state small {
+    margin-top: 5px;
+    font-size: 9px;
+    color: #9ca3af;
+}
+
+
+/* =========================================
+   HISTORY INFORMATION
+========================================= */
+
+.history-information-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.history-parameter-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.history-parameter-list > div {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #edf0f5;
+}
+
+.history-parameter-list > div:last-child {
+    border-bottom: none;
+}
+
+.history-parameter-list span {
+    color: #6b7280;
+    font-size: 11px;
+}
+
+.history-parameter-list strong {
+    color: #1f2937;
+    font-size: 11px;
+}
+
+.history-legend {
+    display: flex;
+    flex-direction: column;
+}
+
+.legend-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px 0;
+    border-bottom: 1px solid #edf0f5;
+}
+
+.legend-item:last-child {
+    border-bottom: none;
+}
+
+.legend-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    margin-top: 4px;
+    flex-shrink: 0;
+}
+
+.normal-dot {
+    background: #22c55e;
+}
+
+.warning-dot {
+    background: #f59e0b;
+}
+
+.inactive-dot {
+    background: #94a3b8;
+}
+
+.legend-item strong {
+    display: block;
+    font-size: 11px;
+    color: #1f2937;
+}
+
+.legend-item small {
+    display: block;
+    margin-top: 3px;
+    color: #9ca3af;
+    font-size: 9px;
+}
+
+
+/* =========================================
+   HISTORY RESPONSIVE
+========================================= */
+
+@media (max-width: 1100px) {
+
+    .history-summary {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .history-information-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+@media (max-width: 768px) {
+
+    .history-summary {
+        grid-template-columns: 1fr;
+    }
+
+    .history-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .history-controls select,
+    .btn-secondary {
+        width: 100%;
+    }
+
+}
+
+@media (max-width: 480px) {
+
+    .history-summary-card {
+        padding: 15px;
+    }
+
+    .history-panel {
+        padding: 15px;
+    }
+
+    .history-footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+
+}
+
+/* =========================================
+   ALARM LOG PAGE
+========================================= */
+
+.alarm-live-status {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    background: #ecfdf5;
+    color: #16a34a;
+    border: 1px solid #bbf7d0;
+    padding: 9px 13px;
+    border-radius: 8px;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.alarm-live-status > span {
+    font-size: 10px;
+}
+
+
+/* =========================================
+   ALARM SUMMARY
+========================================= */
+
+.alarm-summary {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-bottom: 24px;
+}
+
+.alarm-summary-card {
+    background: white;
+    border: 1px solid #e1e7ef;
+    border-radius: 12px;
+    padding: 18px;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, .03);
+}
+
+.alarm-summary-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+}
+
+.total-alarm {
+    background: #fef3c7;
+    color: #d97706;
+}
+
+.active-alarm {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+.last-alarm {
+    background: #e0e7ff;
+    color: #4f46e5;
+}
+
+.highest-alarm {
+    background: #ffedd5;
+    color: #ea580c;
+}
+
+.alarm-summary-card span {
+    display: block;
+    font-size: 10px;
+    color: #6b7280;
+}
+
+.alarm-summary-card strong {
+    display: block;
+    margin-top: 4px;
+    font-size: 20px;
+    color: #1f2937;
+}
+
+.alarm-summary-card small {
+    display: block;
+    margin-top: 3px;
+    font-size: 9px;
+    color: #9ca3af;
+}
+
+
+/* =========================================
+   CURRENT ALARM
+========================================= */
+
+.alarm-current-panel {
+    background: white;
+    border: 1px solid #e1e7ef;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 25px;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, .03);
+}
+
+.alarm-current-indicator {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.alarm-current-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 19px;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.normal-alarm .alarm-current-icon {
+    background: #dcfce7;
+    color: #16a34a;
+}
+
+.alarm-current-label {
+    display: block;
+    font-size: 9px;
+    color: #9ca3af;
+    font-weight: bold;
+    letter-spacing: .5px;
+}
+
+.alarm-current-indicator strong {
+    display: block;
+    margin-top: 3px;
+    font-size: 17px;
+    color: #16a34a;
+}
+
+.alarm-current-indicator small {
+    display: block;
+    margin-top: 4px;
+    color: #9ca3af;
+    font-size: 9px;
+}
+
+.alarm-current-data {
+    display: flex;
+    align-items: center;
+    gap: 35px;
+}
+
+.alarm-current-data > div {
+    text-align: right;
+}
+
+.alarm-current-data span {
+    display: block;
+    color: #9ca3af;
+    font-size: 9px;
+}
+
+.alarm-current-data strong {
+    display: block;
+    margin-top: 4px;
+    color: #374151;
+    font-size: 12px;
+}
+
+
+/* =========================================
+   ALARM TABLE
+========================================= */
+
+.alarm-log-panel {
+    margin-bottom: 24px;
+}
+
+.alarm-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.alarm-controls select {
+    border: 1px solid #d7dee8;
+    border-radius: 6px;
+    padding: 8px 10px;
+    background: white;
+    font-size: 10px;
+    color: #374151;
+}
+
+.alarm-description {
+    margin-bottom: 15px;
+    color: #9ca3af;
+    font-size: 10px;
+}
+
+.alarm-table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.alarm-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 850px;
+}
+
+.alarm-table th {
+    text-align: left;
+    padding: 12px 10px;
+    background: #f8fafc;
+    border-bottom: 1px solid #e5e7eb;
+    color: #6b7280;
+    font-size: 10px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.alarm-table td {
+    padding: 13px 10px;
+    border-bottom: 1px solid #edf0f5;
+    color: #4b5563;
+    font-size: 11px;
+    white-space: nowrap;
+}
+
+.alarm-table tbody tr:hover {
+    background: #fffdf8;
+}
+
+.alarm-table td strong {
+    color: #1f2937;
+}
+
+.alarm-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 9px;
+    font-weight: bold;
+}
+
+.alarm-status.active {
+    color: #dc2626;
+}
+
+.alarm-status.resolved {
+    color: #16a34a;
+}
+
+.alarm-status span {
+    font-size: 8px;
+}
+
+.alarm-action {
+    font-size: 9px;
+    color: #6b7280;
+}
+
+.alarm-table-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 14px;
+    color: #9ca3af;
+    font-size: 9px;
+}
+
+.alarm-table-footer strong {
+    color: #6b7280;
+    font-size: 10px;
+}
+
+
+/* =========================================
+   EMPTY ALARM
+========================================= */
+
+.empty-alarm td {
+    padding: 45px 20px !important;
+}
+
+.alarm-empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.alarm-empty-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #ecfdf5;
+    color: #16a34a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    margin-bottom: 12px;
+}
+
+.alarm-empty-state strong {
+    font-size: 12px;
+    color: #4b5563;
+}
+
+.alarm-empty-state small {
+    margin-top: 5px;
+    font-size: 9px;
+    color: #9ca3af;
+}
+
+
+/* =========================================
+   ALARM INFORMATION
+========================================= */
+
+.alarm-information-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.alarm-parameter-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.alarm-parameter-list > div {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #edf0f5;
+}
+
+.alarm-parameter-list > div:last-child {
+    border-bottom: none;
+}
+
+.alarm-parameter-list span {
+    color: #6b7280;
+    font-size: 11px;
+}
+
+.alarm-parameter-list strong {
+    color: #1f2937;
+    font-size: 11px;
+}
+
+.alarm-legend {
+    display: flex;
+    flex-direction: column;
+}
+
+.alarm-legend-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px 0;
+    border-bottom: 1px solid #edf0f5;
+}
+
+.alarm-legend-item:last-child {
+    border-bottom: none;
+}
+
+.alarm-legend-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    margin-top: 4px;
+    flex-shrink: 0;
+}
+
+.active-dot {
+    background: #ef4444;
+}
+
+.resolved-dot {
+    background: #22c55e;
+}
+
+.normal-alarm-dot {
+    background: #94a3b8;
+}
+
+.alarm-legend-item strong {
+    display: block;
+    font-size: 11px;
+    color: #1f2937;
+}
+
+.alarm-legend-item small {
+    display: block;
+    margin-top: 3px;
+    color: #9ca3af;
+    font-size: 9px;
+}
+
+
+/* =========================================
+   ALARM RESPONSIVE
+========================================= */
+
+@media (max-width: 1100px) {
+
+    .alarm-summary {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .alarm-information-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+@media (max-width: 768px) {
+
+    .alarm-summary {
+        grid-template-columns: 1fr;
+    }
+
+    .alarm-current-panel {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .alarm-current-data {
+        width: 100%;
+        justify-content: space-between;
+        gap: 15px;
+    }
+
+    .alarm-current-data > div {
+        text-align: left;
+    }
+
+    .alarm-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .alarm-controls select,
+    .alarm-controls .btn-secondary {
+        width: 100%;
+    }
+
+}
+
+@media (max-width: 480px) {
+
+    .alarm-summary-card {
+        padding: 15px;
+    }
+
+    .alarm-log-panel {
+        padding: 15px;
+    }
+
+    .alarm-current-panel {
+        padding: 15px;
+    }
+
+    .alarm-current-data {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+}
+
+/* =========================================
+   DEVICE PAGE
+========================================= */
+
+.device-live-status {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    background: #ecfdf5;
+    color: #16a34a;
+    border: 1px solid #bbf7d0;
+    padding: 9px 13px;
+    border-radius: 8px;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.device-live-status > span {
+    font-size: 10px;
+}
+
+.device-live-status.online {
+    background: #ecfdf5;
+    color: #16a34a;
+    border-color: #bbf7d0;
+}
+
+.device-live-status.offline {
+    background: #fef2f2;
+    color: #dc2626;
+    border-color: #fecaca;
+}
+
+
+/* =========================================
+   DEVICE OVERVIEW
+========================================= */
+
+.device-overview {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 18px;
+    margin-bottom: 24px;
+}
+
+.device-main-card,
+.device-uptime-card {
+    background: white;
+    border: 1px solid #e1e7ef;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, .03);
+}
+
+.device-main-card {
+    padding: 22px;
+}
+
+.device-main-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.device-main-icon {
+    width: 58px;
+    height: 58px;
+    border-radius: 12px;
+    background: #e0e7ff;
+    color: #4338ca;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.device-label {
+    display: block;
+    color: #9ca3af;
+    font-size: 8px;
+    font-weight: bold;
+    letter-spacing: .5px;
+}
+
+.device-main-header h3 {
+    margin: 4px 0 2px;
+    font-size: 19px;
+    color: #1f2937;
+}
+
+.device-main-header p {
+    margin: 0;
+    font-size: 10px;
+    color: #9ca3af;
+}
+
+.device-status-row {
+    margin-top: 18px;
+    padding-top: 15px;
+    border-top: 1px solid #edf0f5;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.device-online-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 9px;
+    border-radius: 6px;
+    background: #ecfdf5;
+    color: #16a34a;
+    font-size: 9px;
+    font-weight: bold;
+}
+
+.device-online-badge span {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #22c55e;
+}
+
+.device-connected-text {
+    color: #9ca3af;
+    font-size: 9px;
+}
+
+.device-uptime-card {
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.device-card-label {
+    color: #9ca3af;
+    font-size: 9px;
+    font-weight: bold;
+    letter-spacing: .4px;
+}
+
+.device-uptime-card strong {
+    margin-top: 8px;
+    font-size: 24px;
+    color: #1f2937;
+}
+
+.device-uptime-card small {
+    margin-top: 5px;
+    color: #9ca3af;
+    font-size: 9px;
+}
+
+
+/* =========================================
+   COMPONENT STATUS
+========================================= */
+
+.device-status-panel {
+    margin-bottom: 24px;
+}
+
+.device-components {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+.device-component {
+    border: 1px solid #edf0f5;
+    border-radius: 9px;
+    padding: 14px;
+}
+
+.component-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 9px;
+    background: #e0e7ff;
+    color: #4338ca;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8px;
+    font-weight: bold;
+    margin-bottom: 11px;
+}
+
+.sensor-component {
+    background: #e0f2fe;
+    color: #0284c7;
+}
+
+.display-component {
+    background: #f3e8ff;
+    color: #9333ea;
+}
+
+.buzzer-component {
+    background: #fef3c7;
+    color: #d97706;
+}
+
+.component-info strong {
+    display: block;
+    font-size: 11px;
+    color: #1f2937;
+}
+
+.component-info span {
+    display: block;
+    margin-top: 3px;
+    font-size: 9px;
+    color: #9ca3af;
+    min-height: 25px;
+}
+
+.component-status {
+    margin-top: 13px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 9px;
+    font-weight: bold;
+}
+
+.component-status span {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+}
+
+.component-status.online {
+    color: #16a34a;
+}
+
+.component-status.online span {
+    background: #22c55e;
+}
+
+.component-status.standby {
+    color: #d97706;
+}
+
+.component-status.standby span {
+    background: #f59e0b;
+}
+
+
+/* =========================================
+   DEVICE INFORMATION
+========================================= */
+
+.device-information-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-bottom: 24px;
+}
+
+.device-detail-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.device-detail-list > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #edf0f5;
+    gap: 15px;
+}
+
+.device-detail-list > div:last-child {
+    border-bottom: none;
+}
+
+.device-detail-list span {
+    color: #6b7280;
+    font-size: 10px;
+}
+
+.device-detail-list strong {
+    color: #1f2937;
+    font-size: 10px;
+    text-align: right;
+}
+
+.device-detail-list .detail-online {
+    color: #16a34a;
+}
+
+
+/* =========================================
+   GPIO CONFIGURATION
+========================================= */
+
+.device-pin-panel {
+    margin-bottom: 24px;
+}
+
+.device-pin-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+.device-pin-item {
+    background: #f8fafc;
+    border: 1px solid #edf0f5;
+    border-radius: 8px;
+    padding: 14px;
+}
+
+.device-pin-item span {
+    display: block;
+    color: #6b7280;
+    font-size: 9px;
+}
+
+.device-pin-item strong {
+    display: block;
+    margin-top: 7px;
+    color: #1f2937;
+    font-size: 11px;
+}
+
+.device-pin-item small {
+    display: block;
+    margin-top: 4px;
+    color: #9ca3af;
+    font-size: 8px;
+}
+
+
+/* =========================================
+   DEVICE HEALTH
+========================================= */
+
+.device-health-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.health-item {
+    padding: 12px 0;
+    border-bottom: 1px solid #edf0f5;
+}
+
+.health-item:last-child {
+    border-bottom: none;
+}
+
+.health-item-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 7px;
+}
+
+.health-item-header span {
+    color: #6b7280;
+    font-size: 10px;
+}
+
+.health-item-header strong {
+    color: #16a34a;
+    font-size: 9px;
+}
+
+.health-bar {
+    width: 100%;
+    height: 5px;
+    background: #edf0f5;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.health-bar span {
+    display: block;
+    height: 100%;
+    background: #22c55e;
+    border-radius: 10px;
+}
+
+
+/* =========================================
+   DEVICE EVENTS
+========================================= */
+
+.device-event-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.device-event-list > div {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid #edf0f5;
+}
+
+.device-event-list > div:last-child {
+    border-bottom: none;
+}
+
+.event-time {
+    color: #9ca3af;
+    font-size: 9px;
+    min-width: 48px;
+}
+
+.device-event-list strong {
+    display: block;
+    color: #374151;
+    font-size: 10px;
+}
+
+.device-event-list small {
+    display: block;
+    margin-top: 3px;
+    color: #9ca3af;
+    font-size: 8px;
+}
+
+
+/* =========================================
+   DEVICE RESPONSIVE
+========================================= */
+
+@media (max-width: 1100px) {
+
+    .device-overview {
+        grid-template-columns: 1fr;
+    }
+
+    .device-components {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .device-pin-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@media (max-width: 768px) {
+
+    .device-information-grid,
+    .device-health-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .device-components {
+        grid-template-columns: 1fr;
+    }
+
+    .device-pin-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .device-status-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+}
+
+@media (max-width: 480px) {
+
+    .device-main-card,
+    .device-uptime-card {
+        padding: 15px;
+    }
+
+    .device-status-panel,
+    .device-pin-panel {
+        padding: 15px;
+    }
+
+    .device-detail-list > div {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .device-detail-list strong {
+        text-align: left;
+    }
+
+}
+
+/* =========================================
+   SETTINGS PAGE
+========================================= */
+
+.settings-status {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    background: #eff6ff;
+    color: #2563eb;
+    border: 1px solid #dbeafe;
+    padding: 9px 13px;
+    border-radius: 8px;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.settings-status > span {
+    font-size: 10px;
+}
+
+
+/* =========================================
+   SETTINGS SUMMARY
+========================================= */
+
+.settings-summary {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-bottom: 24px;
+}
+
+.settings-summary-card {
+    background: white;
+    border: 1px solid #e1e7ef;
+    border-radius: 12px;
+    padding: 18px;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, .03);
+}
+
+.settings-summary-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    background: #e0e7ff;
+    color: #4338ca;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.alarm-settings-icon {
+    background: #fef3c7;
+    color: #d97706;
+}
+
+.network-settings-icon {
+    background: #dcfce7;
+    color: #16a34a;
+}
+
+.device-settings-icon {
+    background: #e0f2fe;
+    color: #0284c7;
+    font-size: 8px;
+}
+
+.settings-summary-card span {
+    display: block;
+    color: #6b7280;
+    font-size: 10px;
+}
+
+.settings-summary-card strong {
+    display: block;
+    margin-top: 4px;
+    color: #1f2937;
+    font-size: 13px;
+}
+
+.settings-summary-card small {
+    display: block;
+    margin-top: 3px;
+    color: #9ca3af;
+    font-size: 9px;
+}
+
+
+/* =========================================
+   SETTINGS GRID
+========================================= */
+
+.settings-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-bottom: 24px;
+}
+
+.settings-panel {
+    min-width: 0;
+}
+
+.settings-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.setting-row {
+    min-height: 58px;
+    padding: 13px 0;
+    border-bottom: 1px solid #edf0f5;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.setting-row:last-child {
+    border-bottom: none;
+}
+
+.setting-description {
+    min-width: 0;
+}
+
+.setting-description strong {
+    display: block;
+    color: #374151;
+    font-size: 10px;
+}
+
+.setting-description small {
+    display: block;
+    margin-top: 4px;
+    color: #9ca3af;
+    font-size: 8px;
+    line-height: 1.5;
+}
+
+.setting-value {
+    color: #1f2937;
+    font-size: 10px;
+    white-space: nowrap;
+}
+
+.setting-row select,
+.setting-row input[type="text"],
+.setting-row input[type="number"] {
+    border: 1px solid #d7dee8;
+    background: white;
+    border-radius: 6px;
+    padding: 8px 10px;
+    color: #374151;
+    font-size: 10px;
+    outline: none;
+}
+
+.setting-row select:focus,
+.setting-row input:focus {
+    border-color: #93c5fd;
+}
+
+.setting-row input[type="text"] {
+    width: 150px;
+}
+
+.setting-row input[type="number"] {
+    width: 85px;
+}
+
+
+/* =========================================
+   SETTINGS TOGGLE
+========================================= */
+
+.settings-toggle {
+    position: relative;
+    width: 36px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
+.settings-toggle input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.settings-toggle span {
+    position: absolute;
+    inset: 0;
+    cursor: pointer;
+    background: #cbd5e1;
+    border-radius: 20px;
+    transition: .2s;
+}
+
+.settings-toggle span::before {
+    content: "";
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    left: 3px;
+    top: 3px;
+    background: white;
+    border-radius: 50%;
+    transition: .2s;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .15);
+}
+
+.settings-toggle input:checked + span {
+    background: #22c55e;
+}
+
+.settings-toggle input:checked + span::before {
+    transform: translateX(16px);
+}
+
+
+/* =========================================
+   INPUT GROUP
+========================================= */
+
+.setting-input-group {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.setting-input-group span {
+    color: #6b7280;
+    font-size: 10px;
+}
+
+
+/* =========================================
+   ONLINE STATUS
+========================================= */
+
+.setting-online {
+    color: #16a34a !important;
+    font-size: 10px !important;
+    white-space: nowrap;
+}
+
+
+/* =========================================
+   SYSTEM INFORMATION
+========================================= */
+
+.settings-system-panel {
+    margin-bottom: 24px;
+}
+
+.settings-info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.settings-info-grid > div {
+    background: #f8fafc;
+    border: 1px solid #edf0f5;
+    border-radius: 8px;
+    padding: 13px;
+}
+
+.settings-info-grid span {
+    display: block;
+    color: #9ca3af;
+    font-size: 9px;
+}
+
+.settings-info-grid strong {
+    display: block;
+    margin-top: 6px;
+    color: #1f2937;
+    font-size: 11px;
+}
+
+
+/* =========================================
+   SETTINGS ACTIONS
+========================================= */
+
+.settings-actions {
+    background: white;
+    border: 1px solid #e1e7ef;
+    border-radius: 12px;
+    padding: 17px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, .03);
+}
+
+.settings-actions strong {
+    display: block;
+    color: #374151;
+    font-size: 11px;
+}
+
+.settings-actions small {
+    display: block;
+    margin-top: 4px;
+    color: #9ca3af;
+    font-size: 9px;
+}
+
+.settings-actions > div:last-child {
+    display: flex;
+    gap: 8px;
+}
+
+.settings-save-btn {
+    border: 1px solid #2563eb;
+    background: #2563eb;
+    color: white;
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 10px;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.settings-save-btn:hover {
+    background: #1d4ed8;
+}
+
+
+/* =========================================
+   SETTINGS RESPONSIVE
+========================================= */
+
+@media (max-width: 1100px) {
+
+    .settings-summary {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .settings-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .settings-info-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@media (max-width: 768px) {
+
+    .settings-summary {
+        grid-template-columns: 1fr;
+    }
+
+    .settings-info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .settings-actions {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .settings-actions > div:last-child {
+        width: 100%;
+    }
+
+    .settings-actions button {
+        flex: 1;
+    }
+
+}
+
+@media (max-width: 480px) {
+
+    .settings-summary-card {
+        padding: 15px;
+    }
+
+    .settings-panel,
+    .settings-system-panel {
+        padding: 15px;
+    }
+
+    .setting-row {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 9px;
+    }
+
+    .setting-row select,
+    .setting-row input[type="text"],
+    .setting-row input[type="number"] {
+        width: 100%;
+    }
+
+    .setting-row .settings-toggle {
+        align-self: flex-start;
+    }
+
+    .settings-actions {
+        padding: 15px;
+    }
+
+}

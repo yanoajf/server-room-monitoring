@@ -1,0 +1,2942 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Server Room Monitoring</title>
+
+    <link rel="stylesheet" href="frontend/css/style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            <div class="logo-icon">SR</div>
+
+            <div>
+                <h2>Server Room</h2>
+                <span>Monitoring System</span>
+            </div>
+        </div>
+
+        <nav>
+
+            <a href="#" class="menu active">
+                <span>▣</span>
+                Dashboard
+            </a>
+
+            <a href="#" class="menu">
+                <span>◉</span>
+                Monitoring
+            </a>
+
+            <a href="#" class="menu">
+                <span>▤</span>
+                History
+            </a>
+
+            <a href="#" class="menu">
+                <span>⚠</span>
+                Alarm Log
+            </a>
+
+            <a href="#" class="menu">
+                <span>▦</span>
+                Device
+            </a>
+
+            <a href="#" class="menu">
+                <span>⚙</span>
+                Settings
+            </a>
+
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="connection-dot"></div>
+
+            <div>
+                <strong>System Online</strong>
+                <small>Server connected</small>
+            </div>
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main">
+
+        <!-- HEADER -->
+        <header class="topbar">
+
+            <div>
+                <h1>Server Room Dashboard</h1>
+
+                <p>
+                    Real-time temperature and humidity monitoring
+                </p>
+            </div>
+
+        </header>
+
+
+        <!-- STATUS BANNER -->
+        <section class="status-banner">
+
+            <div class="status-icon">
+                ✓
+            </div>
+
+            <div>
+                <strong>Ruangan Dalam Kondisi Aman</strong>
+
+                <p>
+                    Semua parameter berada dalam batas normal.
+                </p>
+            </div>
+
+            <div class="last-update">
+
+                <span>Last update</span>
+
+                <strong id="lastUpdate">
+                    Baru saja
+                </strong>
+
+            </div>
+
+        </section>
+
+
+        <!-- SENSOR CARDS -->
+        <section class="sensor-grid">
+
+            <!-- TEMPERATURE -->
+            <div class="sensor-card">
+
+                <div class="sensor-header">
+
+                    <div>
+                        <span class="sensor-label">
+                            TEMPERATURE
+                        </span>
+
+                        <h3>Suhu Ruangan</h3>
+                    </div>
+
+                    <div class="sensor-icon temperature">
+                        🌡
+                    </div>
+
+                </div>
+
+                <div class="sensor-value">
+
+                    <span id="temperature">
+                        25.4
+                    </span>
+
+                    <small>°C</small>
+
+                </div>
+
+                <div class="sensor-footer">
+
+                    <span class="normal">
+                        ● NORMAL
+                    </span>
+
+                    <span>
+                        Batas: 26.0 °C
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- HUMIDITY -->
+            <div class="sensor-card">
+
+                <div class="sensor-header">
+
+                    <div>
+                        <span class="sensor-label">
+                            HUMIDITY
+                        </span>
+
+                        <h3>Kelembapan</h3>
+                    </div>
+
+                    <div class="sensor-icon humidity">
+                        💧
+                    </div>
+
+                </div>
+
+                <div class="sensor-value">
+
+                    <span id="humidity">
+                        58.2
+                    </span>
+
+                    <small>%</small>
+
+                </div>
+
+                <div class="sensor-footer">
+
+                    <span class="normal">
+                        ● NORMAL
+                    </span>
+
+                    <span>
+                        Range: 40–70 %
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- DEVICE -->
+            <div class="sensor-card">
+
+                <div class="sensor-header">
+
+                    <div>
+                        <span class="sensor-label">
+                            DEVICE
+                        </span>
+
+                        <h3>ESP8266</h3>
+                    </div>
+
+                    <div class="sensor-icon device">
+                        ◉
+                    </div>
+
+                </div>
+
+                <div
+                    id="dashboardDeviceStatus"
+                    class="device-status"
+                >
+                    <span></span>
+                    ONLINE
+                </div>
+
+                <div class="sensor-footer">
+
+                    <span id="dashboardDeviceConnection">
+                        Wi-Fi Connected
+                    </span>
+
+                    <span id="dashboardDeviceUptime">
+                        Uptime: --:--:--
+                    </span>
+
+                </div>
+            </div>
+
+
+            <!-- ALARM -->
+            <div class="sensor-card">
+
+                <div class="sensor-header">
+
+                    <div>
+                        <span class="sensor-label">
+                            ALARM
+                        </span>
+
+                        <h3>Status Alarm</h3>
+                    </div>
+
+                    <div class="sensor-icon alarm">
+                        🔔
+                    </div>
+
+                </div>
+
+                <div class="alarm-status">
+                    NORMAL
+                </div>
+
+                <div class="sensor-footer">
+
+                    <span class="normal">
+                        ● BUZZER OFF
+                    </span>
+
+                    <span>
+                        No active alarm
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- CHARTS -->
+        <section class="charts-grid">
+
+            <!-- TEMPERATURE CHART -->
+            <div class="chart-card">
+
+                <div class="chart-header">
+
+                    <div>
+
+                        <span class="chart-label">
+                            TEMPERATURE
+                        </span>
+
+                        <h2>Temperature Monitoring</h2>
+
+                    </div>
+
+                    <select id="tempRange">
+
+                        <option>Live</option>
+                        <option>1 Hour</option>
+                        <option>6 Hours</option>
+                        <option>24 Hours</option>
+
+                    </select>
+
+                </div>
+
+                <div class="chart-container">
+
+                    <canvas id="temperatureChart"></canvas>
+
+                </div>
+
+            </div>
+
+
+            <!-- HUMIDITY CHART -->
+            <div class="chart-card">
+
+                <div class="chart-header">
+
+                    <div>
+
+                        <span class="chart-label">
+                            HUMIDITY
+                        </span>
+
+                        <h2>Humidity Monitoring</h2>
+
+                    </div>
+
+                    <select id="humidityRange">
+
+                        <option>Live</option>
+                        <option>1 Hour</option>
+                        <option>6 Hours</option>
+                        <option>24 Hours</option>
+
+                    </select>
+
+                </div>
+
+                <div class="chart-container">
+
+                    <canvas id="humidityChart"></canvas>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- SYSTEM STATUS -->
+        <section class="bottom-grid">
+
+
+            <!-- SYSTEM STATUS -->
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+                        <span class="chart-label">
+                            SYSTEM
+                        </span>
+
+                        <h2>System Status</h2>
+                    </div>
+
+                </div>
+
+
+                <div class="system-list">
+
+                    <div class="system-item">
+                        <div class="system-name">
+                            <span
+                                id="dashboardSystemDeviceCircle"
+                                class="status-circle"
+                            ></span>
+
+                            <div>
+                                <strong>ESP8266</strong>
+                                <small>Monitoring device</small>
+                            </div>
+                        </div>
+
+                        <strong
+                            id="dashboardSystemDeviceStatus"
+                            class="green"
+                        >
+                            Connected
+                        </strong>
+                    </div>
+
+
+                    <div class="system-item">
+
+                        <div class="system-name">
+
+                            <span class="status-circle"></span>
+
+                            <div>
+                                <strong>DHT22</strong>
+                                <small>Temperature & humidity</small>
+                            </div>
+
+                        </div>
+
+                        <strong class="green">
+                            Connected
+                        </strong>
+
+                    </div>
+
+
+                    <div class="system-item">
+
+                        <div class="system-name">
+
+                            <span class="status-circle"></span>
+
+                            <div>
+                                <strong>OLED Display</strong>
+                                <small>Local monitoring</small>
+                            </div>
+
+                        </div>
+
+                        <strong class="green">
+                            Active
+                        </strong>
+
+                    </div>
+
+
+                    <div class="system-item">
+
+                        <div class="system-name">
+
+                            <span class="status-circle"></span>
+
+                            <div>
+                                <strong>Cloud Server</strong>
+                                <small>Data communication</small>
+                            </div>
+
+                        </div>
+
+                        <strong class="green">
+                            Connected
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- LAST READING -->
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <span class="chart-label">
+                            INFORMATION
+                        </span>
+
+                        <h2>Latest Reading</h2>
+
+                    </div>
+
+                </div>
+
+
+                <div class="reading-list">
+
+                    <div>
+
+                        <span>Temperature</span>
+
+                        <strong>
+                            25.4 °C
+                        </strong>
+
+                    </div>
+
+                    <div>
+
+                        <span>Humidity</span>
+
+                        <strong>
+                            58.2 %
+                        </strong>
+
+                    </div>
+
+                    <div>
+
+                        <span>Alarm</span>
+
+                        <strong class="green">
+                            OFF
+                        </strong>
+
+                    </div>
+
+                    <div>
+
+                        <span>Data received</span>
+
+                        <strong>
+                            13:47:22
+                        </strong>
+
+                    </div>
+
+                    <div>
+
+                        <span>Sensor status</span>
+
+                        <strong class="green">
+                            Normal
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- FOOTER -->
+        <footer>
+
+            Server Room Monitoring System
+
+            <span>•</span>
+
+            ESP8266 + DHT22
+
+            <span>•</span>
+
+            <span id="footerYear"></span>
+
+        </footer>
+
+
+        <!-- ==============================
+            MONITORING PAGE
+            ============================== -->
+        <section id="monitoringPage" class="page-section" style="display: none;">
+
+            <div class="page-header">
+                <div>
+                    <span class="page-label">REAL-TIME MONITORING</span>
+                    <h2>Server Room Monitoring</h2>
+                    <p>
+                        Pemantauan kondisi temperatur dan kelembapan server room
+                        secara real-time.
+                    </p>
+                </div>
+
+                <div class="monitoring-live">
+                    <span class="live-dot"></span>
+                    LIVE MONITORING
+                </div>
+            </div>
+
+
+            <!-- MONITORING SUMMARY -->
+            <div class="monitoring-summary">
+
+                <!-- TEMPERATURE -->
+                <div class="monitoring-card">
+
+                    <div class="monitoring-card-top">
+                        <div>
+                            <span class="monitoring-label">
+                                TEMPERATURE
+                            </span>
+
+                            <h3>Temperature</h3>
+                        </div>
+
+                        <div class="monitoring-icon temperature-icon">
+                            🌡
+                        </div>
+                    </div>
+
+                    <div class="monitoring-value">
+                        <span id="monitoringTemperatureValue">
+                            25.4
+                        </span>
+
+                        <small>°C</small>
+                    </div>
+
+                    <div
+                        id="monitoringTemperatureStatus"
+                        class="monitoring-status normal-status"
+                    >
+                        <span>●</span>
+                        NORMAL
+                    </div>
+
+                </div>
+
+
+                <!-- HUMIDITY -->
+                <div class="monitoring-card">
+
+                    <div class="monitoring-card-top">
+                        <div>
+                            <span class="monitoring-label">
+                                HUMIDITY
+                            </span>
+
+                            <h3>Humidity</h3>
+                        </div>
+
+                        <div class="monitoring-icon humidity-icon">
+                            💧
+                        </div>
+                    </div>
+
+                    <div class="monitoring-value">
+                        <span id="monitoringHumidityValue">
+                            58.2
+                        </span>
+
+                        <small>%</small>
+                    </div>
+
+                    <div
+                        id="monitoringHumidityStatus"
+                        class="monitoring-status normal-status"
+                    >
+                        <span>●</span>
+                        NORMAL
+                    </div>
+
+                </div>
+
+
+                <!-- ALARM -->
+                <div class="monitoring-card">
+
+                    <div class="monitoring-card-top">
+                        <div>
+                            <span class="monitoring-label">
+                                ALARM
+                            </span>
+
+                            <h3>Alarm Status</h3>
+                        </div>
+
+                        <div class="monitoring-icon alarm-icon">
+                            🔔
+                        </div>
+                    </div>
+
+                    <div class="monitoring-text-value">
+                        NORMAL
+                    </div>
+
+                    <div
+                        id="monitoringBuzzerStatus"
+                        class="monitoring-status normal-status"
+                    >
+                        <span>●</span>
+                        BUZZER OFF
+                    </div>
+
+                </div>
+
+
+                <!-- DEVICE -->
+                <div class="monitoring-card">
+
+                    <div class="monitoring-card-top">
+                        <div>
+                            <span class="monitoring-label">
+                                DEVICE
+                            </span>
+
+                            <h3>ESP8266</h3>
+                        </div>
+
+                        <div class="monitoring-icon device-icon">
+                            ◉
+                        </div>
+                    </div>
+
+                    <div
+                        id="monitoringDeviceStatus"
+                        class="monitoring-text-value device-online"
+                    >
+                        ONLINE
+                    </div>
+
+                    <div
+                        id="monitoringDeviceConnection"
+                        class="monitoring-status normal-status"
+                    >
+                        <span>●</span>
+                        Wi-Fi CONNECTED
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- REAL-TIME CHARTS -->
+            <div class="monitoring-charts">
+
+                <!-- TEMPERATURE CHART -->
+                <div class="chart-card monitoring-chart-card">
+
+                    <div class="chart-header">
+
+                        <div>
+                            <span class="chart-label">
+                                SENSOR DATA
+                            </span>
+
+                            <h2>Temperature Monitoring</h2>
+
+                            <p class="chart-description">
+                                Perubahan temperatur server room secara real-time.
+                            </p>
+                        </div>
+
+                        <div class="chart-live">
+                            <span></span>
+                            LIVE
+                        </div>
+
+                    </div>
+
+                    <div class="chart-container monitoring-chart-container">
+                        <canvas id="monitoringTemperatureChart"></canvas>
+                    </div>
+
+                </div>
+
+
+                <!-- HUMIDITY CHART -->
+                <div class="chart-card monitoring-chart-card">
+
+                    <div class="chart-header">
+
+                        <div>
+                            <span class="chart-label">
+                                SENSOR DATA
+                            </span>
+
+                            <h2>Humidity Monitoring</h2>
+
+                            <p class="chart-description">
+                                Perubahan kelembapan server room secara real-time.
+                            </p>
+                        </div>
+
+                        <div class="chart-live">
+                            <span></span>
+                            LIVE
+                        </div>
+
+                    </div>
+
+                    <div class="chart-container monitoring-chart-container">
+                        <canvas id="monitoringHumidityChart"></canvas>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- SENSOR INFORMATION -->
+            <div class="panel monitoring-information">
+
+                <div class="panel-header">
+
+                    <div>
+                        <span class="chart-label">
+                            SENSOR INFORMATION
+                        </span>
+
+                        <h2>Current Sensor Data</h2>
+                    </div>
+
+                    <span class="data-update">
+                        Update setiap 2 detik
+                    </span>
+
+                </div>
+
+
+                <div class="sensor-table-container">
+
+                    <table class="sensor-table">
+
+                        <thead>
+                            <tr>
+                                <th>Sensor</th>
+                                <th>Parameter</th>
+                                <th>Current Value</th>
+                                <th>Normal Range</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <tr>
+                                <td>
+                                    <strong>DHT22</strong>
+                                </td>
+
+                                <td>
+                                    Temperature
+                                </td>
+
+                                <td>
+                                    <strong id="monitoringTableTemperature">
+                                        25.4 °C
+                                    </strong>
+                                </td>
+
+                                <td>
+                                    ≤ 26.0 °C
+                                </td>
+
+                                <td>
+                                    <span class="table-status normal">
+                                        ● Normal
+                                    </span>
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td>
+                                    <strong>DHT22</strong>
+                                </td>
+
+                                <td>
+                                    Humidity
+                                </td>
+
+                                <td>
+                                    <strong id="monitoringTableHumidity">
+                                        58.2 %
+                                    </strong>
+                                </td>
+
+                                <td>
+                                    40–70 %
+                                </td>
+
+                                <td>
+                                    <span class="table-status normal">
+                                        ● Normal
+                                    </span>
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td><strong>ESP8266</strong></td>
+                                <td>Device</td>
+
+                                <td id="monitoringTableDeviceStatus">
+                                    ONLINE
+                                </td>
+
+                                <td id="monitoringTableDeviceConnection">
+                                    Connected
+                                </td>
+
+                                <td>
+                                    <span
+                                        id="monitoringTableDeviceBadge"
+                                        class="table-status normal"
+                                    >
+                                        ● Connected
+                                    </span>
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td>
+                                    <strong>Buzzer</strong>
+                                </td>
+
+                                <td>
+                                    Alarm
+                                </td>
+
+                                <td>
+                                    OFF
+                                </td>
+
+                                <td>
+                                    Temperature ≤ 26 °C
+                                </td>
+
+                                <td>
+                                    <span class="table-status normal">
+                                        ● Inactive
+                                    </span>
+                                </td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+
+            <!-- MONITORING DETAILS -->
+            <div class="monitoring-details">
+
+                <!-- STATUS -->
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <div>
+                            <span class="chart-label">
+                                MONITORING STATUS
+                            </span>
+
+                            <h2>System Condition</h2>
+                        </div>
+
+                    </div>
+
+
+                    <div class="condition-list">
+
+                        <div class="condition-item">
+
+                            <div class="condition-icon success">
+                                ✓
+                            </div>
+
+                            <div>
+                                <strong>Temperature Normal</strong>
+                                <small>
+                                    Temperatur masih di bawah batas alarm.
+                                </small>
+                            </div>
+
+                            <span class="condition-ok">
+                                OK
+                            </span>
+
+                        </div>
+
+
+                        <div class="condition-item">
+
+                            <div class="condition-icon success">
+                                ✓
+                            </div>
+
+                            <div>
+                                <strong>Humidity Normal</strong>
+                                <small>
+                                    Kelembapan berada pada range 40–70%.
+                                </small>
+                            </div>
+
+                            <span class="condition-ok">
+                                OK
+                            </span>
+
+                        </div>
+
+
+                        <div class="condition-item">
+                            <div
+                                id="monitoringSystemDeviceIcon"
+                                class="condition-icon success"
+                            >
+                                ✓
+                            </div>
+
+                            <div>
+                                <strong id="monitoringSystemDeviceTitle">
+                                    ESP8266 Connected
+                                </strong>
+
+                                <small id="monitoringSystemDeviceDescription">
+                                    Perangkat monitoring terhubung ke jaringan.
+                                </small>
+                            </div>
+
+                            <span
+                                id="monitoringSystemDeviceStatus"
+                                class="condition-ok"
+                            >
+                                OK
+                            </span>
+                        </div>
+
+
+                        <div class="condition-item">
+
+                            <div class="condition-icon success">
+                                ✓
+                            </div>
+
+                            <div>
+                                <strong>Alarm Inactive</strong>
+                                <small>
+                                    Tidak terdapat kondisi alarm aktif.
+                                </small>
+                            </div>
+
+                            <span class="condition-ok">
+                                OK
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SYSTEM INFORMATION -->
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <div>
+                            <span class="chart-label">
+                                SYSTEM INFORMATION
+                            </span>
+
+                            <h2>Monitoring Configuration</h2>
+                        </div>
+
+                    </div>
+
+
+                    <div class="configuration-list">
+
+                        <div>
+                            <span>Controller</span>
+                            <strong>ESP8266</strong>
+                        </div>
+
+                        <div>
+                            <span>Temperature Sensor</span>
+                            <strong>DHT22</strong>
+                        </div>
+
+                        <div>
+                            <span>Display</span>
+                            <strong>OLED SSD1306</strong>
+                        </div>
+
+                        <div>
+                            <span>Sampling Interval</span>
+                            <strong>2 Seconds</strong>
+                        </div>
+
+                        <div>
+                            <span>Temperature Alarm</span>
+                            <strong>&gt; 26.0 °C</strong>
+                        </div>
+
+                        <div>
+                            <span>Humidity Range</span>
+                            <strong>40–70 %</strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==============================
+            HISTORY PAGE
+            ============================== -->
+        <section id="historyPage" class="page-section" style="display: none;">
+
+            <div class="page-header">
+
+                <div>
+                    <span class="page-label">DATA HISTORY</span>
+
+                    <h2>Sensor History</h2>
+
+                    <p>
+                        Riwayat pembacaan temperatur dan kelembapan server room.
+                    </p>
+                </div>
+
+                <div class="history-info">
+                    <span>●</span>
+                    Data Monitoring
+                </div>
+
+            </div>
+
+
+            <!-- HISTORY SUMMARY -->
+            <div class="history-summary">
+
+                <div class="history-summary-card">
+
+                    <div class="history-summary-icon">
+                        ▤
+                    </div>
+
+                    <div>
+                        <span>Total Data</span>
+                        <strong id="historyTotalData">0</strong>
+                        <small>record tersimpan</small>
+                    </div>
+
+                </div>
+
+
+                <div class="history-summary-card">
+
+                    <div class="history-summary-icon normal-summary">
+                        ✓
+                    </div>
+
+                    <div>
+                        <span>Normal Reading</span>
+                        <strong id="historyNormalData">0</strong>
+                        <small>kondisi normal</small>
+                    </div>
+
+                </div>
+
+
+                <div class="history-summary-card">
+
+                    <div class="history-summary-icon warning-summary">
+                        !
+                    </div>
+
+                    <div>
+                        <span>Warning Reading</span>
+                        <strong id="historyWarningData">0</strong>
+                        <small>melebihi threshold</small>
+                    </div>
+
+                </div>
+
+
+                <div class="history-summary-card">
+
+                    <div class="history-summary-icon latest-summary">
+                        ◷
+                    </div>
+
+                    <div>
+                        <span>Last Reading</span>
+                        <strong id="historyLastReading">--:--:--</strong>
+                        <small>data terbaru</small>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- HISTORY TABLE -->
+            <div class="panel history-panel">
+
+                <div class="panel-header">
+
+                    <div>
+                        <span class="chart-label">
+                            HISTORICAL DATA
+                        </span>
+
+                        <h2>Sensor Reading History</h2>
+                    </div>
+
+                    <div class="history-controls">
+
+                        <select id="historyFilter">
+
+                            <option value="all">
+                                All Status
+                            </option>
+
+                            <option value="normal">
+                                Normal
+                            </option>
+
+                            <option value="warning">
+                                Warning
+                            </option>
+
+                        </select>
+
+                        <button
+                            id="clearHistory"
+                            class="btn-secondary"
+                            type="button"
+                        >
+                            Clear View
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="history-description">
+                    Menampilkan data pembacaan sensor yang diterima oleh sistem monitoring.
+                </div>
+
+
+                <div class="table-container history-table-container">
+
+                    <table class="history-table">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>No</th>
+
+                                <th>Time</th>
+
+                                <th>Temperature</th>
+
+                                <th>Humidity</th>
+
+                                <th>Temperature Status</th>
+
+                                <th>Humidity Status</th>
+
+                                <th>Overall Status</th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="historyTableBody">
+
+                            <tr class="empty-history">
+
+                                <td colspan="7">
+
+                                    <div class="empty-state">
+
+                                        <div class="empty-icon">
+                                            ▤
+                                        </div>
+
+                                        <strong>
+                                            Belum ada data history
+                                        </strong>
+
+                                        <small>
+                                            Data sensor akan muncul ketika monitoring berjalan.
+                                        </small>
+
+                                    </div>
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+                <div class="history-footer">
+
+                    <span>
+                        Data diperbarui secara otomatis setiap pembacaan sensor.
+                    </span>
+
+                    <strong id="historyRecordInfo">
+                        0 records
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- HISTORY INFORMATION -->
+            <div class="history-information-grid">
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <div>
+                            <span class="chart-label">
+                                DATA INFORMATION
+                            </span>
+
+                            <h2>Monitoring Parameters</h2>
+                        </div>
+
+                    </div>
+
+
+                    <div class="history-parameter-list">
+
+                        <div>
+                            <span>Temperature Sensor</span>
+                            <strong>DHT22</strong>
+                        </div>
+
+                        <div>
+                            <span>Temperature Limit</span>
+                            <strong>&gt; 26.0 °C</strong>
+                        </div>
+
+                        <div>
+                            <span>Humidity Sensor</span>
+                            <strong>DHT22</strong>
+                        </div>
+
+                        <div>
+                            <span>Humidity Range</span>
+                            <strong>40–70 %</strong>
+                        </div>
+
+                        <div>
+                            <span>Sampling Interval</span>
+                            <strong>2 Seconds</strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <div>
+                            <span class="chart-label">
+                                STATUS LEGEND
+                            </span>
+
+                            <h2>Reading Status</h2>
+                        </div>
+
+                    </div>
+
+
+                    <div class="history-legend">
+
+                        <div class="legend-item">
+
+                            <span class="legend-dot normal-dot"></span>
+
+                            <div>
+                                <strong>Normal</strong>
+                                <small>
+                                    Semua parameter berada dalam batas normal.
+                                </small>
+                            </div>
+
+                        </div>
+
+
+                        <div class="legend-item">
+
+                            <span class="legend-dot warning-dot"></span>
+
+                            <div>
+                                <strong>Warning</strong>
+                                <small>
+                                    Temperatur atau kelembapan berada di luar batas normal.
+                                </small>
+                            </div>
+
+                        </div>
+
+
+                        <div class="legend-item">
+
+                            <span class="legend-dot inactive-dot"></span>
+
+                            <div>
+                                <strong>Inactive</strong>
+                                <small>
+                                    Tidak terdapat data sensor aktif.
+                                </small>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==============================
+            ALARM LOG PAGE
+            ============================== -->
+        <section id="alarmPage" class="page-section" style="display: none;">
+
+            <div class="page-header">
+
+                <div>
+                    <span class="page-label">ALARM MANAGEMENT</span>
+
+                    <h2>Alarm Log</h2>
+
+                    <p>
+                        Riwayat kondisi alarm dan kejadian temperatur melebihi batas.
+                    </p>
+                </div>
+
+                <div class="alarm-live-status">
+                    <span>●</span>
+                    Alarm Monitoring Active
+                </div>
+
+            </div>
+
+
+            <!-- ALARM SUMMARY -->
+            <div class="alarm-summary">
+
+                <div class="alarm-summary-card">
+
+                    <div class="alarm-summary-icon total-alarm">
+                        !
+                    </div>
+
+                    <div>
+                        <span>Total Alarm</span>
+
+                        <strong id="alarmTotalCount">
+                            0
+                        </strong>
+
+                        <small>
+                            kejadian tercatat
+                        </small>
+                    </div>
+
+                </div>
+
+
+                <div class="alarm-summary-card">
+
+                    <div class="alarm-summary-icon active-alarm">
+                        ●
+                    </div>
+
+                    <div>
+                        <span>Active Alarm</span>
+
+                        <strong id="alarmActiveCount">
+                            0
+                        </strong>
+
+                        <small>
+                            alarm sedang aktif
+                        </small>
+                    </div>
+
+                </div>
+
+
+                <div class="alarm-summary-card">
+
+                    <div class="alarm-summary-icon last-alarm">
+                        ◷
+                    </div>
+
+                    <div>
+                        <span>Last Alarm</span>
+
+                        <strong id="alarmLastTime">
+                            --:--:--
+                        </strong>
+
+                        <small>
+                            kejadian terakhir
+                        </small>
+                    </div>
+
+                </div>
+
+
+                <div class="alarm-summary-card">
+
+                    <div class="alarm-summary-icon highest-alarm">
+                        ↑
+                    </div>
+
+                    <div>
+                        <span>Highest Temperature</span>
+
+                        <strong id="alarmHighestTemperature">
+                            -- °C
+                        </strong>
+
+                        <small>
+                            temperatur tertinggi
+                        </small>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- CURRENT ALARM STATUS -->
+            <div class="alarm-current-panel">
+
+                <div class="alarm-current-indicator normal-alarm">
+
+                    <div class="alarm-current-icon">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <span class="alarm-current-label">
+                            CURRENT ALARM STATUS
+                        </span>
+
+                        <strong id="currentAlarmStatus">
+                            NORMAL
+                        </strong>
+
+                        <small id="currentAlarmDescription">
+                            Tidak terdapat kondisi alarm aktif pada server room.
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="alarm-current-data">
+
+                    <div>
+                        <span>Temperature</span>
+
+                        <strong id="currentAlarmTemperature">
+                            -- °C
+                        </strong>
+                    </div>
+
+                    <div>
+                        <span>Threshold</span>
+
+                        <strong>
+                            26.0 °C
+                        </strong>
+                    </div>
+
+                    <div>
+                        <span>Buzzer</span>
+
+                        <strong id="currentAlarmBuzzer">
+                            OFF
+                        </strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ALARM TABLE -->
+            <div class="panel alarm-log-panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <span class="chart-label">
+                            ALARM HISTORY
+                        </span>
+
+                        <h2>Alarm Events</h2>
+
+                    </div>
+
+
+                    <div class="alarm-controls">
+
+                        <select id="alarmFilter">
+
+                            <option value="all">
+                                All Events
+                            </option>
+
+                            <option value="active">
+                                Active
+                            </option>
+
+                            <option value="resolved">
+                                Resolved
+                            </option>
+
+                        </select>
+
+
+                        <button
+                            id="clearAlarmLog"
+                            class="btn-secondary"
+                            type="button"
+                        >
+                            Clear View
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="alarm-description">
+                    Daftar kejadian ketika temperatur server room melewati batas alarm.
+                </div>
+
+
+                <div class="table-container alarm-table-container">
+
+                    <table class="alarm-table">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>No</th>
+
+                                <th>Date</th>
+
+                                <th>Time</th>
+
+                                <th>Temperature</th>
+
+                                <th>Threshold</th>
+
+                                <th>Duration</th>
+
+                                <th>Status</th>
+
+                                <th>Device</th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="alarmTableBody">
+
+                            <tr class="empty-alarm">
+
+                                <td colspan="8">
+
+                                    <div class="alarm-empty-state">
+
+                                        <div class="alarm-empty-icon">
+                                            ✓
+                                        </div>
+
+                                        <strong>
+                                            Belum ada alarm
+                                        </strong>
+
+                                        <small>
+                                            Tidak ada kejadian alarm yang tercatat.
+                                        </small>
+
+                                    </div>
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+                <div class="alarm-table-footer">
+
+                    <span>
+                        Alarm tercatat otomatis ketika temperatur melewati threshold.
+                    </span>
+
+                    <strong id="alarmRecordInfo">
+                        0 events
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- ALARM INFORMATION -->
+            <div class="alarm-information-grid">
+
+                <!-- ALARM CONFIGURATION -->
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <span class="chart-label">
+                                ALARM CONFIGURATION
+                            </span>
+
+                            <h2>Alarm Parameters</h2>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="alarm-parameter-list">
+
+                        <div>
+
+                            <span>Temperature Threshold</span>
+
+                            <strong>
+                                &gt; 26.0 °C
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>Alarm Trigger</span>
+
+                            <strong>
+                                Automatic
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>Buzzer</span>
+
+                            <strong>
+                                Enabled
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>Sensor</span>
+
+                            <strong>
+                                DHT22
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>Sampling Interval</span>
+
+                            <strong>
+                                2 Seconds
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ALARM LEGEND -->
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <span class="chart-label">
+                                STATUS INFORMATION
+                            </span>
+
+                            <h2>Alarm Status</h2>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="alarm-legend">
+
+                        <div class="alarm-legend-item">
+
+                            <span class="alarm-legend-dot active-dot"></span>
+
+                            <div>
+
+                                <strong>
+                                    Active
+                                </strong>
+
+                                <small>
+                                    Temperatur masih berada di atas threshold.
+                                </small>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="alarm-legend-item">
+
+                            <span class="alarm-legend-dot resolved-dot"></span>
+
+                            <div>
+
+                                <strong>
+                                    Resolved
+                                </strong>
+
+                                <small>
+                                    Kondisi temperatur sudah kembali normal.
+                                </small>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="alarm-legend-item">
+
+                            <span class="alarm-legend-dot normal-alarm-dot"></span>
+
+                            <div>
+
+                                <strong>
+                                    Normal
+                                </strong>
+
+                                <small>
+                                    Tidak terdapat alarm aktif.
+                                </small>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==============================
+            DEVICE PAGE
+            ============================== -->
+        <section id="devicePage" class="page-section" style="display: none;">
+
+            <div class="page-header">
+
+                <div>
+                    <span class="page-label">DEVICE MANAGEMENT</span>
+
+                    <h2>Device Information</h2>
+
+                    <p>
+                        Informasi perangkat monitoring, sensor, koneksi, dan status hardware.
+                    </p>
+                </div>
+
+                <div
+                    id="deviceLiveStatus"
+                    class="device-live-status"
+                >
+                    <span>●</span>
+                    Device Online
+                </div>
+
+            </div>
+
+
+            <!-- DEVICE OVERVIEW -->
+            <div class="device-overview">
+
+                <div class="device-main-card">
+
+                    <div class="device-main-header">
+
+                        <div class="device-main-icon">
+                            ESP
+                        </div>
+
+                        <div>
+
+                            <span class="device-label">
+                                PRIMARY MONITORING DEVICE
+                            </span>
+
+                            <h3>
+                                ESP8266
+                            </h3>
+
+                            <p>
+                                Server Room Monitoring Node
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="device-status-row">
+
+                        <div class="device-online-badge">
+                            <span></span>
+                            ONLINE
+                        </div>
+
+                        <span class="device-connected-text">
+                            Connected to monitoring server
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="device-uptime-card">
+
+                    <span class="device-card-label">
+                        DEVICE UPTIME
+                    </span>
+
+                    <strong id="deviceUptime">
+                        00:00:00
+                    </strong>
+
+                    <small>
+                        Since last device restart
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            
+
+
+            <!-- NETWORK + DEVICE DETAILS -->
+            <div class="device-information-grid">
+
+                <!-- NETWORK -->
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <span class="chart-label">
+                                NETWORK INFORMATION
+                            </span>
+
+                            <h2>Connection</h2>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="device-detail-list">
+
+                        <div>
+
+                            <span>Connection Status</span>
+
+                            <strong class="detail-online">
+                                ● Connected
+                            </strong>
+
+                        </div>
+
+                        <div>
+
+                            <span>Network Interface</span>
+
+                            <strong>
+                                Wi-Fi
+                            </strong>
+
+                        </div>
+
+                        <div>
+
+                            <span>IP Address</span>
+
+                            <strong id="deviceIpAddress">
+                                --
+                            </strong>
+
+                        </div>
+
+                        <div>
+
+                            <span>Signal Strength</span>
+
+                            <strong id="deviceWifiSignal">
+                                -- dBm
+                            </strong>
+
+                        </div>
+
+                        <div>
+
+                            <span>Server Connection</span>
+
+                            <strong class="detail-online">
+                                ● Connected
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- DEVICE DETAILS -->
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <span class="chart-label">
+                                DEVICE INFORMATION
+                            </span>
+
+                            <h2>System Details</h2>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="device-detail-list">
+
+                        <div>
+
+                            <span>Device Name</span>
+
+                            <strong>
+                                Server Room Node
+                            </strong>
+
+                        </div>
+
+                        <div>
+
+                            <span>Controller</span>
+
+                            <strong>
+                                NodeMCU ESP8266
+                            </strong>
+
+                        </div>
+
+                        <div>
+
+                            <span>Temperature Sensor</span>
+
+                            <strong>
+                                DHT22
+                            </strong>
+
+                        </div>
+
+                        <div>
+
+                            <span>Display</span>
+
+                            <strong>
+                                OLED SSD1306
+                            </strong>
+
+                        </div>
+
+                        <div>
+
+                            <span>Sampling Interval</span>
+
+                            <strong>
+                                2 Seconds
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- PIN CONFIGURATION -->
+            <div class="panel device-pin-panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <span class="chart-label">
+                            HARDWARE CONFIGURATION
+                        </span>
+
+                        <h2>GPIO Configuration</h2>
+
+                    </div>
+
+                </div>
+
+
+                <div class="device-pin-grid">
+
+                    <div class="device-pin-item">
+
+                        <span>Temperature / Humidity</span>
+
+                        <strong>
+                            D4 / GPIO2
+                        </strong>
+
+                        <small>
+                            DHT22
+                        </small>
+
+                    </div>
+
+
+                    <div class="device-pin-item">
+
+                        <span>OLED SDA</span>
+
+                        <strong>
+                            D2 / GPIO4
+                        </strong>
+
+                        <small>
+                            I2C Data
+                        </small>
+
+                    </div>
+
+
+                    <div class="device-pin-item">
+
+                        <span>OLED SCL</span>
+
+                        <strong>
+                            D1 / GPIO5
+                        </strong>
+
+                        <small>
+                            I2C Clock
+                        </small>
+
+                    </div>
+
+
+                    <div class="device-pin-item">
+
+                        <span>Buzzer</span>
+
+                        <strong>
+                            D5 / GPIO14
+                        </strong>
+
+                        <small>
+                            Alarm Output
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==============================
+            SETTINGS PAGE
+            ============================== -->
+        <section id="settingsPage" class="page-section" style="display: none;">
+
+            <div class="page-header">
+
+                <div>
+                    <span class="page-label">SYSTEM CONFIGURATION</span>
+
+                    <h2>System Settings</h2>
+
+                    <p>
+                        Konfigurasi parameter monitoring, alarm, perangkat, dan koneksi server.
+                    </p>
+                </div>
+
+                <div class="settings-status">
+                    <span>●</span>
+                    Configuration Ready
+                </div>
+
+            </div>
+
+
+            <!-- SETTINGS OVERVIEW -->
+            <div class="settings-summary">
+
+                <div class="settings-summary-card">
+
+                    <div class="settings-summary-icon">
+                        ⚙
+                    </div>
+
+                    <div>
+                        <span>Monitoring</span>
+                        <strong>Enabled</strong>
+                        <small>Sensor monitoring aktif</small>
+                    </div>
+
+                </div>
+
+
+                <div class="settings-summary-card">
+
+                    <div class="settings-summary-icon alarm-settings-icon">
+                        !
+                    </div>
+
+                    <div>
+                        <span>Alarm System</span>
+                        <strong>Enabled</strong>
+                        <small>Temperature alarm aktif</small>
+                    </div>
+
+                </div>
+
+
+                <div class="settings-summary-card">
+
+                    <div class="settings-summary-icon network-settings-icon">
+                        ↔
+                    </div>
+
+                    <div>
+                        <span>Server Connection</span>
+                        <strong>Online</strong>
+                        <small>Backend connection</small>
+                    </div>
+
+                </div>
+
+
+                <div class="settings-summary-card">
+
+                    <div class="settings-summary-icon device-settings-icon">
+                        ESP
+                    </div>
+
+                    <div>
+                        <span>Device</span>
+                        <strong>ESP8266</strong>
+                        <small>Monitoring controller</small>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- MONITORING SETTINGS -->
+            <div class="settings-grid">
+
+                <div class="panel settings-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <span class="chart-label">
+                                MONITORING CONFIGURATION
+                            </span>
+
+                            <h2>Sensor Settings</h2>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="settings-form">
+
+                        <div class="setting-row">
+
+                            <div class="setting-description">
+
+                                <strong>
+                                    Monitoring Status
+                                </strong>
+
+                                <small>
+                                    Aktifkan sistem pembacaan sensor.
+                                </small>
+
+                            </div>
+
+                            <label class="settings-toggle">
+
+                                <input
+                                    type="checkbox"
+                                    id="monitoringEnabled"
+                                    checked
+                                >
+
+                                <span></span>
+
+                            </label>
+
+                        </div>
+
+
+                        <div class="setting-row">
+
+                            <div class="setting-description">
+
+                                <strong>
+                                    Sampling Interval
+                                </strong>
+
+                                <small>
+                                    Interval pembacaan sensor.
+                                </small>
+
+                            </div>
+
+                            <select id="samplingInterval">
+
+                                <option value="1">
+                                    1 Second
+                                </option>
+
+                                <option value="2" selected>
+                                    2 Seconds
+                                </option>
+
+                                <option value="5">
+                                    5 Seconds
+                                </option>
+
+                                <option value="10">
+                                    10 Seconds
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="setting-row">
+
+                            <div class="setting-description">
+
+                                <strong>
+                                    Temperature Sensor
+                                </strong>
+
+                                <small>
+                                    Sensor yang digunakan untuk temperatur.
+                                </small>
+
+                            </div>
+
+                            <strong class="setting-value">
+                                DHT22
+                            </strong>
+
+                        </div>
+
+
+                        <div class="setting-row">
+
+                            <div class="setting-description">
+
+                                <strong>
+                                    Humidity Sensor
+                                </strong>
+
+                                <small>
+                                    Sensor yang digunakan untuk kelembapan.
+                                </small>
+
+                            </div>
+
+                            <strong class="setting-value">
+                                DHT22
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ALARM SETTINGS -->
+                <div class="panel settings-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <span class="chart-label">
+                                ALARM CONFIGURATION
+                            </span>
+
+                            <h2>Alarm Settings</h2>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="settings-form">
+
+                        <div class="setting-row">
+
+                            <div class="setting-description">
+
+                                <strong>
+                                    Alarm System
+                                </strong>
+
+                                <small>
+                                    Aktifkan sistem alarm temperatur.
+                                </small>
+
+                            </div>
+
+                            <label class="settings-toggle">
+
+                                <input
+                                    type="checkbox"
+                                    id="alarmEnabled"
+                                    checked
+                                >
+
+                                <span></span>
+
+                            </label>
+
+                        </div>
+
+
+                        <div class="setting-row">
+
+                            <div class="setting-description">
+
+                                <strong>
+                                    Temperature Threshold
+                                </strong>
+
+                                <small>
+                                    Alarm aktif ketika temperatur melebihi nilai ini.
+                                </small>
+
+                            </div>
+
+                            <div class="setting-input-group">
+
+                                <input
+                                    type="number"
+                                    id="temperatureThreshold"
+                                    value="26.0"
+                                    step="0.1"
+                                >
+
+                                <span>°C</span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="setting-row">
+
+                            <div class="setting-description">
+
+                                <strong>
+                                    Buzzer Alarm
+                                </strong>
+
+                                <small>
+                                    Buzzer digunakan sebagai indikator alarm.
+                                </small>
+
+                            </div>
+
+                            <label class="settings-toggle">
+
+                                <input
+                                    type="checkbox"
+                                    id="buzzerEnabled"
+                                    checked
+                                >
+
+                                <span></span>
+
+                            </label>
+
+                        </div>
+
+
+                        <div class="setting-row">
+
+                            <div class="setting-description">
+
+                                <strong>
+                                    Alarm Logging
+                                </strong>
+
+                                <small>
+                                    Simpan setiap kejadian alarm ke history.
+                                </small>
+
+                            </div>
+
+                            <label class="settings-toggle">
+
+                                <input
+                                    type="checkbox"
+                                    id="alarmLogging"
+                                    checked
+                                >
+
+                                <span></span>
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- DEVICE SETTINGS -->
+            <div class="settings-grid">
+
+                <div class="panel settings-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <span class="chart-label">
+                                DEVICE CONFIGURATION
+                            </span>
+
+                            <h2>Device Settings</h2>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="settings-form">
+
+                        <div class="setting-row">
+
+                            <div class="setting-description">
+
+                                <strong>
+                                    Device Name
+                                </strong>
+
+                                <small>
+                                    Nama perangkat pada sistem monitoring.
+                                </small>
+
+                            </div>
+
+                            <input
+                                type="text"
+                                id="deviceNameSetting"
+                                value="Server Room Node"
+                            >
+
+                        </div>
+
+
+                        <div class="setting-row">
+
+                            <div class="setting-description">
+
+                                <strong>
+                                    Device Controller
+                                </strong>
+
+                                <small>
+                                    Mikrokontroler yang digunakan.
+                                </small>
+
+                            </div>
+
+                            <strong class="setting-value">
+                                NodeMCU ESP8266
+                            </strong>
+
+                        </div>
+
+
+                        <div class="setting-row">
+
+                            <div class="setting-description">
+
+                                <strong>
+                                    OLED Display
+                                </strong>
+
+                                <small>
+                                    Display monitoring lokal.
+                                </small>
+
+                            </div>
+
+                            <strong class="setting-value">
+                                SSD1306 128×64
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SERVER SETTINGS -->
+                <div class="panel settings-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <span class="chart-label">
+                                SERVER CONFIGURATION
+                            </span>
+
+                            <h2>Backend Connection</h2>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="settings-form">
+
+                        <div class="setting-row">
+
+                            <div class="setting-description">
+
+                                <strong>
+                                    Server Status
+                                </strong>
+
+                                <small>
+                                    Status koneksi dashboard ke backend.
+                                </small>
+
+                            </div>
+
+                            <strong class="setting-online">
+                                ● Connected
+                            </strong>
+
+                        </div>
+
+
+                        <div class="setting-row">
+
+                            <div class="setting-description">
+
+                                <strong>
+                                    API Endpoint
+                                </strong>
+
+                                <small>
+                                    Endpoint yang digunakan dashboard.
+                                </small>
+
+                            </div>
+
+                            <input
+                                type="text"
+                                id="apiEndpoint"
+                                value="/api"
+                                placeholder="/api"
+                            >
+
+                        </div>
+
+
+                        <div class="setting-row">
+
+                            <div class="setting-description">
+
+                                <strong>
+                                    Real-Time Connection
+                                </strong>
+
+                                <small>
+                                    Koneksi untuk update data secara langsung.
+                                </small>
+
+                            </div>
+
+                            <strong class="setting-online">
+                                Ready
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- SYSTEM INFORMATION -->
+            <div class="panel settings-system-panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <span class="chart-label">
+                            SYSTEM INFORMATION
+                        </span>
+
+                        <h2>Configuration Overview</h2>
+
+                    </div>
+
+                </div>
+
+
+                <div class="settings-info-grid">
+
+                    <div>
+
+                        <span>Temperature Limit</span>
+
+                        <strong>
+                            26.0 °C
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>Humidity Range</span>
+
+                        <strong>
+                            40–70 %
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>Sampling Interval</span>
+
+                        <strong>
+                            2 Seconds
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>Temperature Sensor</span>
+
+                        <strong>
+                            DHT22
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>Controller</span>
+
+                        <strong>
+                            ESP8266
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>Alarm Output</span>
+
+                        <strong>
+                            Buzzer
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- SETTINGS ACTION -->
+            <div class="settings-actions">
+
+                <div>
+
+                    <strong>
+                        Configuration Changes
+                    </strong>
+
+                    <small>
+                        Pengaturan akan diterapkan setelah sistem backend aktif.
+                    </small>
+
+                </div>
+
+                <div>
+
+                    <button
+                        type="button"
+                        class="btn-secondary"
+                        id="resetSettings"
+                    >
+                        Reset
+                    </button>
+
+                    <button
+                        type="button"
+                        class="settings-save-btn"
+                        id="saveSettings"
+                    >
+                        Save Configuration
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<script src="frontend/js/app.js"></script>
+
+</body>
+</html>
