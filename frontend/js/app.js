@@ -65,10 +65,13 @@ let socket = null;
 
 function connectWebSocket() {
 
+    const wsProtocol =
+        window.location.protocol === "https:"
+            ? "wss:"
+            : "ws:";
+
     const wsUrl =
-        API_BASE_URL
-            .replace("https://", "wss://")
-            .replace("/api", "");
+        `${wsProtocol}//${window.location.host}/ws`;
 
     console.log(
         "Menghubungkan WebSocket:",
