@@ -8,7 +8,7 @@
 ========================================= */
 
 const API_BASE_URL =
-    "https://fictional-space-bassoon-v6q576wgvx95f66xr-3000.app.github.dev/api";
+    "/api";
 
 
 async function apiRequest(
