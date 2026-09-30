@@ -281,27 +281,17 @@ async function loadDashboardData() {
                 });
 
                 temperatureLabels.push(time);
-                temperatureData.push(
-                    data.sensor.temperature
-                );
+                temperatureData.push(data.sensor.temperature);
 
                 humidityLabels.push(time);
-                humidityData.push(
-                    data.sensor.humidity
-                );
+                humidityData.push(data.sensor.humidity);
 
-                if (
-                    temperatureLabels.length >
-                    CONFIG.maxDataPoints
-                ) {
+                if (temperatureLabels.length > CONFIG.maxDataPoints) {
                     temperatureLabels.shift();
                     temperatureData.shift();
                 }
 
-                if (
-                    humidityLabels.length >
-                    CONFIG.maxDataPoints
-                ) {
+                if (humidityLabels.length > CONFIG.maxDataPoints) {
                     humidityLabels.shift();
                     humidityData.shift();
                 }
@@ -373,6 +363,8 @@ const temperatureData = [];
 const humidityLabels = [];
 const humidityData = [];
 
+let lastChartRecordedAt = null;
+let lastChartUpdateTime = null;
 
 /* =========================================
    DATA HISTORY
