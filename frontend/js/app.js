@@ -2867,6 +2867,8 @@ initializeDashboard();
 setInterval(
     function () {
 
+        loadDashboardData();
+
         updateSensorDisplay();
 
         updateMonitoringDisplay();
