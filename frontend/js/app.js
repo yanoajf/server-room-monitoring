@@ -2896,7 +2896,7 @@ setInterval(
 
 loadDashboardData();
 
-connectWebSocket();
+//connectWebSocket();
 
 initializeHistoryFilter();
 
