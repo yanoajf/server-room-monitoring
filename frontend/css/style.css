@@ -2857,3 +2857,38 @@ footer span {
     }
 
 }
+
+/* =========================================
+   CHART ZOOM SLIDER
+   ========================================= */
+
+.chart-with-slider {
+    position: relative;
+    display: flex;
+    align-items: stretch;
+}
+
+.chart-with-slider canvas {
+    flex: 1;
+    min-width: 0;
+}
+
+/* Area slider */
+.chart-zoom-slider {
+    width: 140px;
+    height: 18px;
+    position: absolute;
+    left: -62px;
+    top: 50%;
+    transform: translateY(-50%) rotate(-90deg);
+    transform-origin: center;
+
+    margin: 0;
+    cursor: ns-resize;
+    z-index: 10;
+}
+
+/* Supaya slider tidak mengganggu angka Y */
+.chart-with-slider {
+    padding-left: 8px;
+}
