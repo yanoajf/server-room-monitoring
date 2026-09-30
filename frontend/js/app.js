@@ -2881,10 +2881,8 @@ setInterval(
 
         addHistoryData();
 
-        updateDeviceInformation();
-
     },
-    CONFIG.updateInterval
+    1000
 );
 
 setInterval(
