@@ -319,7 +319,17 @@
 
                 </div>
 
-                <div class="chart-container">
+                <div class="chart-container chart-with-slider">
+
+                    <input
+                        type="range"
+                        class="chart-zoom-slider"
+                        id="temperatureZoomSlider"
+                        min="0"
+                        max="100"
+                        value="50"
+                        aria-label="Temperature chart zoom"
+                    >
 
                     <canvas id="temperatureChart"></canvas>
 
@@ -354,7 +364,17 @@
 
                 </div>
 
-                <div class="chart-container">
+                <div class="chart-container chart-with-slider">
+
+                    <input
+                        type="range"
+                        class="chart-zoom-slider"
+                        id="humidityZoomSlider"
+                        min="0"
+                        max="100"
+                        value="50"
+                        aria-label="Humidity chart zoom"
+                    >
 
                     <canvas id="humidityChart"></canvas>
 
@@ -759,8 +779,20 @@
 
                     </div>
 
-                    <div class="chart-container monitoring-chart-container">
+                    <div class="chart-container monitoring-chart-container chart-with-slider">
+
+                        <input
+                            type="range"
+                            class="chart-zoom-slider"
+                            id="monitoringTemperatureZoomSlider"
+                            min="0"
+                            max="100"
+                            value="50"
+                            aria-label="Monitoring temperature chart zoom"
+                        >
+
                         <canvas id="monitoringTemperatureChart"></canvas>
+
                     </div>
 
                 </div>
@@ -790,8 +822,20 @@
 
                     </div>
 
-                    <div class="chart-container monitoring-chart-container">
+                    <div class="chart-container monitoring-chart-container chart-with-slider">
+
+                        <input
+                            type="range"
+                            class="chart-zoom-slider"
+                            id="monitoringHumidityZoomSlider"
+                            min="0"
+                            max="100"
+                            value="50"
+                            aria-label="Monitoring humidity chart zoom"
+                        >
+
                         <canvas id="monitoringHumidityChart"></canvas>
+
                     </div>
 
                 </div>
